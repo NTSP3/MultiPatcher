@@ -1,0 +1,57 @@
+#include <conio.h> /* Include Control Input Output Library */
+#include <stdio.h> /* Include Standard Input Output Library */
+#include <dos.h>
+
+/* Help */
+/* = A comment */
+/* Groups begin with a void statement. */
+/* Use the group's name to go to that group. */
+/* This code is (probably) C. */
+/* int main is where the code begins executing. */
+/* To end this program, use return 0. */
+/* Print statements: printf = Output text, cprintf = Colored Output Text */
+/* Each command has to end with a semi-colon ';' to tell the compiler that that's the end. */
+/* Most commands need () at the end of the COMMAND, even if there is nothing to write. */
+
+/* Available Colors */
+
+void CurrentScreen(); /* Declare a function/group for later use */
+void SetScreenRes();
+void SetupWindow();
+
+int main() { /* Program starts here */
+
+  int currentMode; /*This needs to be put at the beginning of the program, else errors will occur. */
+  ScreenRes12(); /* Skip to the first portion of the Setup */
+  return 0; /* Exit program and return value 0 (success) to the system */
+
+}
+
+void CurrentScreen() { /* Save current video mode */
+
+  union REGS inRegs, outRegs;
+  inRegs.h.ah = 0x0F; /* Function number to get current video mode */
+  int86(0x10, &inRegs, &outRegs);
+  currentMode = outRegs.h.al;
+  SetScreenRes(0x12); /* Tell SetScreenRes to set the video mode to 640x480:16 */
+}
+
+void SetScreenRes(int mode) { /* Screen resolution handler (integers) */
+
+  union REGS inRegs, outRegs;
+  inRegs.h.ah = 0x00; /* Function number for setting video mode */
+  inRegs.h.al = mode; /* Set video mode to the value in "mode" */
+  int86(0x10, inRegs, outRegs);
+  SetupWindow();
+}
+
+void SetupWindow() { /* Main - Beginning of a portion */
+
+  textcolor(LIGHTGRAY);
+  textbackground(BLUE);
+  clrscr(); /* Clear Screen */
+  cprintf("\n MultiPatcher Setup by Wintelic\r"); /* Output text */
+  cprintf("\n様様様様様様様様様様様様様様様様\r\n");
+  /*textcolor(*/
+
+} /* End of a portion */

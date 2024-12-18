@@ -1,0 +1,27 @@
+create a win.com that can rename files and swap between win3.1 real and 386 mode.
+
+MSEMultiPatcher RM/386 Swapper == 30
+
+30 / 2 == 15
+
+== 40 - 15 == 25
+
+Starting Windows 3.1 in Real mode...
+123456789
+         0123456789
+                   0123456789
+                             0123456
+
+== 36/2 == 18 // 33/2 == (approx. 32 / 2 == 16)
+
+40 - 18 == 22 // 40 - 16 == 24
+
+Starting Windows 3.1 in Protected mode...
+123456789
+         0123456789
+                   0123456789
+                             0123456789  
+                                       01
+
+== 42/2 == 21
+40 - 21 == 19

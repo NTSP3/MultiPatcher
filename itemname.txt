@@ -1,0 +1,18 @@
+# == .\system\
+
+progman.exe == C2FILE1.SUP
+control.exe == C2FILE2.SUP
+system.ini == C2FILE3.SUP
+#kernel.exe == C2FILE4.SUP
+#dosswap.exe == C2FILE5.SUP
+#gdi.exe == C2FILE6.SUP
+#user.exe == C2FILE7.SUP
+#shell.dll == C2FILE8.SUP
+#commdlg.dll == C2FILE9.SUP
+#system.drv == C2FILE10.SUP
+#keyboard.drv == C2FILE11.SUP
+#mouse.drv == C2FILE12.SUP
+#comm.drv == C2FILE13.SUP
+#sound.drv == C2FILE14.SUP
+WIN.COM_beta == C2FILE15.SUP
+WIN.COM_update == C2FILE16.SUP

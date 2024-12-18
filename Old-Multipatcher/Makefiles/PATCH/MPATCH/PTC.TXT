@@ -1,0 +1,2 @@
+[Path] 
+windir=c:\windows 

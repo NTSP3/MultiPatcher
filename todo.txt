@@ -1,0 +1,2 @@
+Check whether old vers of SETVER.EXE (6.x) work on MS-DOS 7.0 and 7.1. If not, create separate options (screens) to select which version of setver they want installed.
+Also, check IF setver.exe exist in the current directory. If (exists) then rename setver.exe ?????.bak.

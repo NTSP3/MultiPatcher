@@ -1,0 +1,31 @@
+todo:
+
+Enable the use of multiple options in my app
+
+example: SOURCE.EXE /CL /NH /NI /NL /developer-option-show-inputcursor
+         and SOURCE.EXE /cl /nh etc.
+
+         Also, if it includes /nh or /NH, show "only for developer" messsage and terminate app.
+
+NEW:
+
+Complete /NI option and add a new option under /developer-option used to play every line one by one when the user presses a key.
+Also enable the use of multiple options.
+
+NEW 1:
+
+Complete the ability to launch multiple options and complete /NI option and and add a new option under /developer-option etc
+
+Add a SETUP.EXE program that tells DOS users to use DOSSETUP.EXE and start AUTORUN depending on the version of Windows. 
+
+Example:
+
+IF DOS = "Use DOSSETUP.EXE to start MultiPatcher."
+IF Windows {
+  IF Windows XP = Start AUTORUNXP.EXE 
+  Autorun Xp - Looks like WinXP autorun and plays Windows Server 2003 unofficial sound
+  IF Windows NT 4+ 2000- (4 and above, 2000 and below) = Start AUTORUNNT.EXE
+  Autorun NT - Looks like Windows NT 4 autorun and plays Windows NT 5.0 Beta 1 Startup sound
+}
+IF AUTORUN(XP or NT) OR SETUP(XP or NT) is started in DOS, output "Use DOSSETUP.EXE instead.".
+IF AUTORUN(XP or NT) OR SETUP(XP or NT) is started in reverse OS (eg SetupNT on Windows XP), output a message saying "Operating System not supported.".

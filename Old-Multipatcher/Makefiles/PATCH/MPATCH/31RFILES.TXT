@@ -1,0 +1,17 @@
+alphabet order
+
+comm.drv
+commdlg.dll
+windir - control.exe
+dosswap.exe
+gdi.exe
+kernel.exe
+keyboard.drv
+mouse.drv
+windir - progman.exe
+shell.dll
+sound.drv
+system.drv
+windir - system.ini
+user.exe
+windir - win.com

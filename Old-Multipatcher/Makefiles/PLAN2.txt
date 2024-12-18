@@ -1,0 +1,4 @@
+Remove NOTE: Use LBA-48 etc in the RTM version
+
+Done! TODO: Add the Setup to Black screen transition when exiting.
+Also Done! TODO: Add a transition to remove the exit choice screen starting from top to bottom when user presses ENTER on that screen

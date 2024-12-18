@@ -1,0 +1,271 @@
+#include <dirent.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <conio.h>
+#include <io.h>
+
+FILE *filechk;
+char usrvars[96];
+char sysvars[96];
+char optvals[96];
+char twobits[2];
+char tstbits[2];
+char obitvar;
+char appname;
+int moreval;
+int systest;
+void UserHelp() {
+
+  printf("\r\nMultiPatcher Options: %s", appname);
+  printf(" [/CL] [/NC] [/NI] [/LM]"); // [/NH] [/TI]\n");
+  printf("\r\n   /CL         Load setup in monochrome mode");
+  printf("\r\n   /NC         Skip file check");
+  printf("\r\n   /NI         Do not load animations");
+  printf("\r\n   /LM         Run Option Selector");
+//  printf("\r\n   /NH         Do not hide cursor (DEV only)");
+//  printf("\r\n   /TI         Start in frame-by-frame mode (DEV only)");
+  printf("\r\n   /?          Show program syntax\r\n");
+  if (moreval == 1) {
+
+    printf("\r\nNote: Using /? and /LM with other options will only launch help.\r\n");
+
+  }
+
+  _setcursortype(_NORMALCURSOR);
+  exit(0);
+
+}
+
+void ChannelQuit();
+void StartupAnimation();
+int i = 1;
+int n = 2;
+int main(int argc, char* argv[]) {
+
+  _setcursortype(_NOCURSOR);
+  textbackground(BLACK);
+  textcolor(LIGHTGRAY);
+  appname = strrchr(argv[0], '\\');
+  appname++;
+  if (argc > 2) moreval = 1;
+  while (i != 9) {
+
+    if (argc > i && strcmp(argv[i], "/?") == 0) {
+
+      UserHelp();
+
+    }
+
+    else if (argc > n && (strcmp(argv[n], "/LM") == 0 || strcmp(argv[n], "/lm") == 0 || strcmp(argv[n], "/lM") == 0 ||  strcmp(argv[n], "/Lm") == 0)) {
+
+      UserHelp();
+
+    }
+
+    i = i + 1;
+    n = i + 1;
+
+  }
+
+  if (argc > 1) strcpy(usrvars, argv[1]);
+  strcat(usrvars, " ");
+  if (argc > 2) strcat(usrvars, argv[2]);
+  strcat(usrvars, " ");
+  if (argc > 3) strcat(usrvars, argv[3]);
+  strcat(usrvars, " ");
+  if (argc > 4) strcat(usrvars, argv[4]);
+  strcat(usrvars, " ");
+  if (argc > 5) strcat(usrvars, argv[5]);
+  strcat(usrvars, " ");
+  if (argc > 6) strcat(usrvars, argv[6]);
+  strcat(usrvars, " ");
+  if (argc > 7) strcat(usrvars, argv[7]);
+  strcat(usrvars, " ");
+  if (argc > 8) strcat(usrvars, argv[8]);
+  strcat(usrvars, " ");
+  if (argc > 9) strcat(usrvars, argv[9]);
+  strcat(usrvars, " ");
+  if (argc > 1) {
+
+    clrscr();
+    printf("\r\nFound parameter(s). Launching MultiPatcher with option(s): %s", usrvars);
+    printf("\r\nSending variables.\r\n\n");
+    StartupAnimation();
+
+  }
+
+  else {
+
+    clrscr();
+    printf("\r\nNo parameters were found. Launching MultiPatcher default options.");
+    printf("\r\nTo launch with parameters, use /LM for selector and /? for help.\r\n\n");
+    StartupAnimation();
+
+  }
+
+  _setcursortype(_NORMALCURSOR);
+  return 0;
+
+}
+
+void StartupAnimation() {
+
+  printf("Attempting to launch main #1");
+  i = 0;
+  while (i != 21) {
+
+    putchar('.');
+    delay(15);
+    i = i + 1;
+
+  }
+
+  if (chdir(".\\utilfs") != 0) {
+
+    printf("\n\n\rERROR: Utility directory not found in current folder. Unable to proceed.\r\n");
+    printf("Make sure you have the necessary files and permissions.\r\n");
+    _setcursortype(_NORMALCURSOR);
+    exit(0);
+
+  }
+  chdir("..");
+  filechk = fopen(".\\utilfs\\XTRUN.EXE", "r");
+  if (filechk == NULL) {
+
+    printf("\n\n\rERROR: Main executable not found in utilities directory. Unable to proceed.\r\n");
+    printf("Make sure you have the necessary files and permissions.\r\n");
+    _setcursortype(_NORMALCURSOR);
+    exit(0);
+
+  }
+
+  fclose(filechk);
+  filechk = fopen(".\\utilfs\\RUNTIME.SWP", "r");
+  if (filechk == NULL) {
+
+    printf("\n\n\rERROR: Communication file not found in utilities directory. Unable to proceed.\r\n");
+    printf("Make sure you have the necessary files and permissions.\r\n");
+    _setcursortype(_NORMALCURSOR);
+    exit(0);
+
+  }
+
+  fclose(filechk);
+  if (rename(".\\utilfs\\runtime.swp", ".\\utilfs\\runtime.old") != 0) {
+
+    printf("\n\n\rERROR: Process nchange returned failure. Unable to proceed.\r\n");
+    printf("Make sure you have the necessary permissions.\r\n");
+    _setcursortype(_NORMALCURSOR);
+    exit(0);
+
+  }
+
+  filechk = fopen(".\\utilfs\\RTFN.EXE", "r");
+  if (filechk == NULL) {
+
+    printf("\n\n\rERROR: Prompt executable not found in utilities directory. Unable to proceed.\r\n");
+    printf("Make sure you have the necessary files and permissions.\r\n");
+    _setcursortype(_NORMALCURSOR);
+    ChannelQuit();
+
+  }
+
+  fclose(filechk);
+  systest = system(".\\utilfs\\RTFN.EXE");
+  if (systest != 0) {
+
+    printf("\n\n\rERROR: Shell not initialized!\r\n");
+    _setcursortype(_NORMALCURSOR);
+    ChannelQuit();
+
+  }
+
+  filechk = fopen(".\\utilfs\\RUNTIME.SWP", "w");
+  fputs("99", filechk);
+  fclose(filechk);
+  filechk = fopen(".\\utilfs\\RUNTIME.SWP", "r");
+  fread(twobits, sizeof(char), 7, filechk);
+  if (strcmp(twobits, "99") != 0) {
+
+    printf("\n\n\rERROR: Communication file - read or write error occured. Unable to proceed.\r\n");
+    printf("Make sure you have the necessary permissions.\r\n\n");
+    printf("Quit: ");
+    fclose(filechk);
+    _setcursortype(_NORMALCURSOR);
+    ChannelQuit();
+
+  }
+
+  fclose(filechk);
+  printf("\r\n");
+  strcpy(sysvars, ".\\utilfs\\xtrun.exe /runbymain::command-structoptions ");
+  strcpy(twobits, " ");
+  strcat(sysvars, usrvars);
+  system(sysvars);
+  filechk = fopen(".\\utilfs\\RUNTIME.SWP", "r");
+  fread(tstbits, sizeof(char), 2, filechk);
+  if (strcmp(tstbits, "00 ") == 0) {
+
+    fseek(filechk, 2, SEEK_SET);
+    obitvar = fgetc(filechk);
+    if (obitvar == '1') strcpy(optvals, " /true");
+    else strcpy(optvals, " /false");
+    fseek(filechk, 3, SEEK_SET);
+    obitvar = fgetc(filechk);
+    if (obitvar == '1') strcat(optvals, " /true");
+    else strcat(optvals, " /false");
+    fseek(filechk, 4, SEEK_SET);
+    obitvar = fgetc(filechk);
+    if (obitvar == '1') strcat(optvals, " /true");
+    else strcat(optvals, "");
+    fclose(filechk);
+    strcpy(sysvars, ".\\utilfs\\cscrq.exe /runbymain:run-with-custom-settings /scr::1");
+    strcat(sysvars, optvals);
+    system(sysvars);
+    filechk = fopen(".\\utilfs\\RUNTIME.SWP", "r");
+    fread(tstbits, sizeof(char), 2, filechk);
+    if (strcmp(tstbits, "01 ") == 0) {
+
+      fseek(filechk, 2, SEEK_SET);
+      obitvar = fgetc(filechk);
+      if (obitvar == '0') { textbackground(BLACK); clrscr(); ChannelQuit();
+/*      else if (obitvar == '1') {
+
+        strcpy(sysvars, ".\\utilfs\\xtrun.exe /runbymain::command-structoptions ");
+        strcat(sysvars, usrvars);
+        system(sysvars);
+
+      }*/
+
+      fclose(filechk);
+      exit(0);
+
+    }
+
+    fclose(filechk);
+
+  }
+
+  ChannelQuit();
+
+}
+
+void ChannelQuit() {
+
+  system("del .\\utilfs\\runtime.swp > NUL");
+  rename(".\\utilfs\\runtime.old", ".\\utilfs\\runtime.swp");
+  exit(0);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <conio.h>
+#include <dir.h>
+#include <stdlib.h>
+
+char file;
+
+void ea();
+
+int main() {
+
+  ea();
+  return 0;
+
+}
+
+void ea() {
+
+  FILE *file;
+  if (file = fopen(".\\ea.txt", "r")) {
+
+    printf("File exist");
+    fclose(file);
+    exit (0);
+
+  }
+
+  else {
+
+    printf("File doesn't exist");
+    fclose(file);
+    exit(0);
+
+  }
+
+}

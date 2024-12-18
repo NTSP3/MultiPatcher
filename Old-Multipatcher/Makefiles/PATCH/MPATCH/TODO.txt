@@ -1,0 +1,3 @@
+to do
+
+complete multipatcher's 6th option - tell to the user to manually edit msdos.sys (put ';' before windir, set winbootdir to win98 path). automatically install the debugger item (.dbg file) and add it to the autoexec.bat file

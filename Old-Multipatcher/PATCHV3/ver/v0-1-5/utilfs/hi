@@ -1,0 +1,19 @@
+Hi! This file is used as a temporary information swap file between the
+programs of MultiPatcher.
+
+This file would look something like this if any program used this file:
+01011
+etc.
+and sometimes like
+39011
+
+The values in this file would be written as 1s and 0s, kind of like binary.
+1s represent True while 0s represent False. The first 2 characters would
+define the program (or function) which wrote it. Additional characters are
+program-specific settings.
+
+As you may expect, this file cannot be written to if it is in read-only mode.
+Therefore, if nothing can be written to the file, the programs would fail to
+communicate with each other.
+
+Written by the creator on MS-DOS.

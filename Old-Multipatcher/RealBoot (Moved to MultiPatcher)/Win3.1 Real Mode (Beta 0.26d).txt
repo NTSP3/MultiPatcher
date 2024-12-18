@@ -1,0 +1,31 @@
+Required files from Windows 3.1.026d to run Windows 3.10 in Real Mode -
+
+%windir%\.
+------------
+
+PROGMAN.EXE (Required - Beta)
+PROGMAN.INI (Required to start, any version will work)
+SYSTEM.INI (Required - Beta - use modded one)
+REG.DAT (Auto creation)
+WIN.COM (Required - Beta)
+CONTROL.EXE (Required - Beta)
+
+%windir%\system
+-----------------
+
+VGASYS.FON (3.1 or Beta)
+VGAFIX.FON (3.1 or Beta)
+VGAOEM.FON (3.1 or Beta)
+-KERNEL.EXE (Required - Beta)
+-DOSSWAP.EXE (Required - Beta)
+-GDI.EXE (Required - Beta)
+-USER.EXE (Required - Beta)
+-SHELL.DLL (Required - Beta to start in Real Mode)
+-COMMDLG.DLL (Required - Beta)
+VGA.DRV (3.1 or Beta - 3.1 is cooler)
+VGACOLOR.2GR (3.1 or Beta - 3.1 is cooler. May be missing in WFW 3.11)
+-SYSTEM.DRV (Required - Beta)
+-KEYBOARD.DRV (Required - Beta)
+-COMM.DRV (Required - Beta)
+-SOUND.DRV (Required - Beta)
+-MOUSE.DRV (Required - Beta)

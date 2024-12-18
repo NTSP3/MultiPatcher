@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+void ea();
+
+char e;
+
+int main() {
+
+  ea();
+  return 0;
+
+}
+
+void ea() {
+
+  e = getch();
+  if (e == 'e') exit(0);
+  else ea();
+
+}

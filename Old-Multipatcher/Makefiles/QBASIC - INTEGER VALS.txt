@@ -1,0 +1,5 @@
+cl clear && CLRSCRS
+nc skip check && SKIPCHK
+ni no animations && DENYANI
+nh hide cursor (dev) && DEVMICE
+ti frame by frame (dev) && DEVSCRS
